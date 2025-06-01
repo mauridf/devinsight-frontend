@@ -5,9 +5,34 @@ import SideMenu from '../components/SideMenu';
 import SummaryCard from '../components/SummaryCard';
 import DataTable from '../components/DataTable';
 
+// Interface para tipar os dados do usuário
+interface UserData {
+  id?: string;
+  nome?: string;
+  email?: string;
+  tipoUsuario?: number;
+}
+
+// Obter dados do usuário do localStorage de forma segura
+const getUserData = (): UserData => {
+  try {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      return JSON.parse(userString) as UserData;
+    }
+  } catch (error) {
+    console.error('Erro ao ler dados do usuário do localStorage:', error);
+  }
+  return {};
+};
+
 const DashboardPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  // Obter dados do usuário
+  const userData = getUserData();
+  const userName = userData.nome || 'Usuário';
 
   // Dados de exemplo para os projetos
   const projects = [
@@ -88,7 +113,7 @@ const DashboardPage: React.FC = () => {
 
           {/* Tabela de Projetos */}
           <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
-            Projetos cadastrados por [Usuario.Nowe]
+            Projetos cadastrados por {userName}
           </Typography>
           <DataTable
             columns={columns}
