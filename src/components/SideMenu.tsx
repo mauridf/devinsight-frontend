@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Link } from 'react-router-dom';
 import {
   Folder as ProjectsIcon,
   People as PersonasIcon,
@@ -27,7 +28,7 @@ const menuItems = [
   {
     title: 'LEVANTAMENTO',
     items: [
-      { text: 'Projetos', icon: <ProjectsIcon /> },
+      { text: 'Projetos', icon: <ProjectsIcon />, path: '/projetos' },
       { text: 'Personas Chave', icon: <PersonasIcon /> },
       { text: 'Stakeholders', icon: <StakeholdersIcon /> },
       { text: 'Requisitos', icon: <RequirementsIcon /> },
@@ -77,7 +78,10 @@ const SideMenu: React.FC = () => {
           <List>
             {section.items.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton>
+                <ListItemButton 
+                  component={item.path ? Link : 'div'} 
+                  to={item.path || ''}
+                >
                   <ListItemIcon sx={{ minWidth: 36, color: '#6CB1E1' }}>
                     {item.icon}
                   </ListItemIcon>
@@ -91,5 +95,4 @@ const SideMenu: React.FC = () => {
     </Box>
   );
 };
-
 export default SideMenu;

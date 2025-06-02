@@ -12,6 +12,8 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import ProjectPage from './pages/ProjectPage';
+import ProjectFormPage from './pages/ProjectFormPage';
 
 // Componente de rota protegida
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -38,6 +40,16 @@ const App: React.FC = () => {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/projetos"
+              element={
+                <PrivateRoute>
+                  <ProjectPage />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/projetos/cadastro" element={<ProjectFormPage />} />
+            <Route path="/projetos/editar/:id" element={<ProjectFormPage isEdit />} />
         </Routes>
         </Router>
       </StyledThemeProvider>

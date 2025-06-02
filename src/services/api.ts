@@ -28,4 +28,32 @@ export const AuthService = {
   },
 };
 
+// Project Service
+export const ProjectService = {
+  create: async (projectData: any) => {
+    return api.post('/projetos', projectData);
+  },
+  getAll: async () => {
+    return api.get('/projetos');
+  },
+  getById: async (id: string) => {
+    console.log('Chamando API para projeto com ID:', id);
+    const response = await api.get(`/projetos/${id}`);
+    console.log('Resposta da API:', response);
+    return response;
+  },
+  update: async (id: string, projectData: any) => {
+    return api.put(`/projetos/${id}`, projectData);
+  },
+  delete: async (id: string) => {
+    return api.delete(`/projetos/${id}`);
+  },
+  getByUser: async (userId: string) => {
+    return api.get(`/projetos/usuario/${userId}`);
+  },
+  getMyProjects: async () => {
+    return api.get('/projetos/meus-projetos');
+  },
+};
+
 export default api;
