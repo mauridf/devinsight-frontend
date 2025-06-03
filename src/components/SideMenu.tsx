@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Link } from 'react-router-dom';
 import {
+  Dashboard as DashboardIcon,
   Folder as ProjectsIcon,
   People as PersonasIcon,
   Groups as StakeholdersIcon,
@@ -26,10 +27,16 @@ import {
 
 const menuItems = [
   {
+    title: 'VISÃO GERAL',
+    items: [
+      { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' }
+    ]
+  },
+  {
     title: 'LEVANTAMENTO',
     items: [
       { text: 'Projetos', icon: <ProjectsIcon />, path: '/projetos' },
-      { text: 'Personas Chave', icon: <PersonasIcon /> },
+      { text: 'Personas Chave', icon: <PersonasIcon />, path: '/personaschave' },
       { text: 'Stakeholders', icon: <StakeholdersIcon /> },
       { text: 'Requisitos', icon: <RequirementsIcon /> },
       { text: 'Fases do Projeto', icon: <PhasesIcon /> },

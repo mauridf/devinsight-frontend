@@ -7,13 +7,13 @@ import GlobalStyle from './styles/globalStyles';
 import theme from './styles/theme';
 import { isAuthenticated } from './services/auth';
 
-// Páginas que serão criadas depois
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ProjectPage from './pages/ProjectPage';
 import ProjectFormPage from './pages/ProjectFormPage';
+import PersonaChavePage from './pages/PersonaChavePage';
 
 // Componente de rota protegida
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -32,24 +32,11 @@ const App: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           
             <Route path="/register" element={<RegisterPage />} />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <DashboardPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/projetos"
-              element={
-                <PrivateRoute>
-                  <ProjectPage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/projetos/cadastro" element={<ProjectFormPage />} />
-            <Route path="/projetos/editar/:id" element={<ProjectFormPage isEdit />} />
+            <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+            <Route path="/projetos" element={<PrivateRoute><ProjectPage /></PrivateRoute>} />
+            <Route path="/projetos/cadastro" element={<PrivateRoute><ProjectFormPage /></PrivateRoute>} />
+            <Route path="/projetos/editar/:id" element={<PrivateRoute><ProjectFormPage isEdit /></PrivateRoute>} />
+            <Route path="/personaschave" element={<PrivateRoute><PersonaChavePage /></PrivateRoute>} />
         </Routes>
         </Router>
       </StyledThemeProvider>

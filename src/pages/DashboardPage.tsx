@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import Header from '../components/Header';
 import SideMenu from '../components/SideMenu';
 import SummaryCard from '../components/SummaryCard';
 import DataTable from '../components/DataTable';
+import { DashboardService, ProjectService } from '../services/api';
 
-// Interface para tipar os dados do usuário
 interface UserData {
   id?: string;
   nome?: string;
@@ -13,7 +13,21 @@ interface UserData {
   tipoUsuario?: number;
 }
 
-// Obter dados do usuário do localStorage de forma segura
+interface DashboardData {
+  totalProjetos: number;
+  projetosEmAndamento: number;
+  projetosFinalizados: number;
+}
+
+interface Project {
+  id: string;
+  nome: string;
+  cliente: string;
+  dataInicio: string;
+  dataEntrega: string;
+  status: number;
+}
+
 const getUserData = (): UserData => {
   try {
     const userString = localStorage.getItem('user');
@@ -29,42 +43,68 @@ const getUserData = (): UserData => {
 const DashboardPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   // Obter dados do usuário
   const userData = getUserData();
   const userName = userData.nome || 'Usuário';
+  const userId = userData.id || '';
 
-  // Dados de exemplo para os projetos
-  const projects = [
-    { id: 1, name: 'Projeto 1', client: 'Cliente 1', startDate: '01/01/2023', deliveryDate: '30/06/2023', status: 'Em Andamento' },
-    { id: 2, name: 'Projeto 2', client: 'Cliente 2', startDate: '15/02/2023', deliveryDate: '15/08/2023', status: 'Pausado' },
-    { id: 3, name: 'Projeto 3', client: 'Cliente 3', startDate: '10/03/2023', deliveryDate: '10/09/2023', status: 'Finalizado' },
-    { id: 4, name: 'Projeto 4', client: 'Cliente 4', startDate: '05/04/2023', deliveryDate: '05/10/2023', status: 'Finalizado' },
-    { id: 5, name: 'Projeto 5', client: 'Cliente 5', startDate: '20/05/2023', deliveryDate: '20/11/2023', status: 'Cancelado' },
-  ];
-
-  interface Column {
-    id: string;
-    label: string;
-    width: string;
-    align?: 'left' | 'right' | 'center';
-  }
-
-  const columns: Column[] = [
-    { id: 'name', label: 'Projeto', width: '25%' },
-    { id: 'client', label: 'Cliente', width: '25%' },
-    { id: 'startDate', label: 'Data Início', align: 'center', width: '15%' },
-    { id: 'deliveryDate', label: 'Data Entrega', align: 'center', width: '15%' },
-    { id: 'status', label: 'Status', align: 'center', width: '20%' }
-  ];
-
-  const renderStatusCell = (row: any) => {
-    const statusColors: Record<string, string> = {
-        'Em Andamento': '#A4D2F4',
-        'Finalizado': '#E9EDF0',
-        'Pausado': '#FFE0B2',
-        'Cancelado': '#FFCDD2'
+  // Carregar dados do dashboard
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        
+        // Carrega dados do dashboard
+        const dashboardResponse = await DashboardService.dashboard(userId);
+        setDashboardData(dashboardResponse.data);
+        
+        // Carrega projetos do usuário
+        const projectsResponse = await ProjectService.getByUser(userId);
+        setProjects(projectsResponse.data);
+        
+      } catch (err) {
+        console.error('Erro ao carregar dados do dashboard:', err);
+        setError('Erro ao carregar dados. Por favor, tente novamente.');
+      } finally {
+        setLoading(false);
+      }
     };
+
+    if (userId) {
+      loadData();
+    }
+  }, [userId]);
+
+  const columns = [
+    { id: 'nome', label: 'Projeto', width: '25%' },
+    { id: 'cliente', label: 'Cliente', width: '25%' },
+    { id: 'dataInicio', label: 'Data Início', align: 'center' as const, width: '15%' },
+    { id: 'dataEntrega', label: 'Data Entrega', align: 'center' as const, width: '15%' },
+    { id: 'status', label: 'Status', align: 'center' as const, width: '20%' }
+  ];
+
+  const renderStatusCell = (row: Project) => {
+    const statusMap: Record<number, string> = {
+      0: 'Em Andamento',
+      1: 'Finalizado',
+      2: 'Pausado',
+      3: 'Cancelado'
+    };
+
+    const statusColors: Record<string, string> = {
+      'Em Andamento': '#A4D2F4',
+      'Finalizado': '#E9EDF0',
+      'Pausado': '#FFE0B2',
+      'Cancelado': '#FFCDD2'
+    };
+
+    const statusText = statusMap[row.status] || 'Desconhecido';
 
     return (
       <Box 
@@ -73,24 +113,48 @@ const DashboardPage: React.FC = () => {
         py={0.5} 
         borderRadius={1}
         sx={{
-          backgroundColor: statusColors[row.status] || '#E9EDF0',
+          backgroundColor: statusColors[statusText] || '#E9EDF0',
           color: '#444',
           fontWeight: 'medium'
         }}
       >
-        {row.status}
+        {statusText}
       </Box>
     );
   };
 
-  const handleChangePage = (newPage: number) => {
-    setPage(newPage);
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR');
   };
 
-  const handleChangeRowsPerPage = (newRowsPerPage: number) => {
-    setRowsPerPage(newRowsPerPage);
-    setPage(0);
-  };
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <Box display="flex" minHeight="calc(100vh - 64px)">
+          <SideMenu />
+          <Box flex={1} p={3} display="flex" justifyContent="center" alignItems="center">
+            <CircularProgress />
+          </Box>
+        </Box>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Header />
+        <Box display="flex" minHeight="calc(100vh - 64px)">
+          <SideMenu />
+          <Box flex={1} p={3}>
+            <Typography color="error">{error}</Typography>
+          </Box>
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>
@@ -106,9 +170,18 @@ const DashboardPage: React.FC = () => {
 
           {/* Cards de Resumo */}
           <Box display="flex" justifyContent="space-between" mb={4} flexWrap="wrap" gap={2}>
-            <SummaryCard title="PROJETOS CRIADOS" value="24" />
-            <SummaryCard title="PROJETOS EM ANDAMENTO" value="8" />
-            <SummaryCard title="PROJETOS FINALIZADOS" value="16" />
+            <SummaryCard 
+              title="PROJETOS CRIADOS" 
+              value={dashboardData?.totalProjetos.toString() || '0'} 
+            />
+            <SummaryCard 
+              title="PROJETOS EM ANDAMENTO" 
+              value={dashboardData?.projetosEmAndamento.toString() || '0'} 
+            />
+            <SummaryCard 
+              title="PROJETOS FINALIZADOS" 
+              value={dashboardData?.projetosFinalizados.toString() || '0'} 
+            />
           </Box>
 
           {/* Tabela de Projetos */}
@@ -120,13 +193,21 @@ const DashboardPage: React.FC = () => {
             data={projects.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
             count={projects.length}
             page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
+            onPageChange={(newPage) => setPage(newPage)}
+            onRowsPerPageChange={(newRowsPerPage) => {
+              setRowsPerPage(newRowsPerPage);
+              setPage(0);
+            }}
             renderCell={(row, columnId) => {
-              if (columnId === 'status') {
-                return renderStatusCell(row);
+              switch (columnId) {
+                case 'status':
+                  return renderStatusCell(row);
+                case 'dataInicio':
+                case 'dataEntrega':
+                  return formatDate(row[columnId]);
+                default:
+                  return row[columnId];
               }
-              return row[columnId];
             }}
           />
         </Box>

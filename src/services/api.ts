@@ -28,6 +28,13 @@ export const AuthService = {
   },
 };
 
+// Dashboard
+export const DashboardService = {
+  dashboard: async (userId: string) => {
+    return api.get(`/projetos/dashboard/${userId}`);
+  }
+};
+
 // Project Service
 export const ProjectService = {
   create: async (projectData: any) => {
@@ -54,6 +61,25 @@ export const ProjectService = {
   getMyProjects: async () => {
     return api.get('/projetos/meus-projetos');
   },
+};
+
+// Key Persona
+export const KeyPersonaService = {
+  create: async (projetoId: string, personaData: any) => {
+    return api.post(`/projetos/${projetoId}/personaschaves`, personaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/personaschaves`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/personaschaves/${id}`);
+  },
+  update: async (projetoId: string, id: string, personaData: any) => {
+    return api.put(`/projetos/${projetoId}/personaschaves/${id}`, personaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/personaschaves/${id}`);
+  }
 };
 
 export default api;
