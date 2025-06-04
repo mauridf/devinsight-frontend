@@ -37,7 +37,7 @@ const menuItems = [
     items: [
       { text: 'Projetos', icon: <ProjectsIcon />, path: '/projetos' },
       { text: 'Personas Chave', icon: <PersonasIcon />, path: '/personaschave' },
-      { text: 'Stakeholders', icon: <StakeholdersIcon /> },
+      { text: 'Stakeholders', icon: <StakeholdersIcon />, path: '/stakeholder' },
       { text: 'Requisitos', icon: <RequirementsIcon /> },
       { text: 'Fases do Projeto', icon: <PhasesIcon /> },
       { text: 'Funcionalidades', icon: <FeaturesIcon /> },

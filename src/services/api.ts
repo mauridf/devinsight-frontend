@@ -82,4 +82,23 @@ export const KeyPersonaService = {
   }
 };
 
+// Stakeholders
+export const StakeholdersService = {
+  create: async (projetoId: string, personaData: any) => {
+    return api.post(`/projetos/${projetoId}/stakeholders`, personaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/stakeholders`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/stakeholders/${id}`);
+  },
+  update: async (projetoId: string, id: string, personaData: any) => {
+    return api.put(`/projetos/${projetoId}/stakeholders/${id}`, personaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/stakeholders/${id}`);
+  }
+};
+
 export default api;

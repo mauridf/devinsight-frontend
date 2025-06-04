@@ -14,6 +14,7 @@ import DashboardPage from './pages/DashboardPage';
 import ProjectPage from './pages/ProjectPage';
 import ProjectFormPage from './pages/ProjectFormPage';
 import PersonaChavePage from './pages/PersonaChavePage';
+import StakeHolderPage from './pages/StakeHolersPage';
 
 // Componente de rota protegida
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -37,6 +38,7 @@ const App: React.FC = () => {
             <Route path="/projetos/cadastro" element={<PrivateRoute><ProjectFormPage /></PrivateRoute>} />
             <Route path="/projetos/editar/:id" element={<PrivateRoute><ProjectFormPage isEdit /></PrivateRoute>} />
             <Route path="/personaschave" element={<PrivateRoute><PersonaChavePage /></PrivateRoute>} />
+            <Route path="/stakeholder" element={<PrivateRoute><StakeHolderPage /></PrivateRoute>} />
         </Routes>
         </Router>
       </StyledThemeProvider>
