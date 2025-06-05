@@ -120,4 +120,23 @@ export const RequisitosService = {
   }
 };
 
+// Fases do Projeto
+export const FasesProjetoService = {
+  create: async (projetoId: string, personaData: any) => {
+    return api.post(`/projetos/${projetoId}/fasesprojeto`, personaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/fasesprojeto`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/fasesprojeto/${id}`);
+  },
+  update: async (projetoId: string, id: string, personaData: any) => {
+    return api.put(`/projetos/${projetoId}/fasesprojeto/${id}`, personaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/fasesprojeto/${id}`);
+  }
+};
+
 export default api;

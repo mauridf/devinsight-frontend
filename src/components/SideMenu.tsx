@@ -39,7 +39,7 @@ const menuItems = [
       { text: 'Personas Chave', icon: <PersonasIcon />, path: '/personaschave' },
       { text: 'Stakeholders', icon: <StakeholdersIcon />, path: '/stakeholder' },
       { text: 'Requisitos', icon: <RequirementsIcon />, path: '/requisito' },
-      { text: 'Fases do Projeto', icon: <PhasesIcon /> },
+      { text: 'Fases do Projeto', icon: <PhasesIcon />, path: '/fasesprojeto' },
       { text: 'Funcionalidades', icon: <FeaturesIcon /> },
       { text: 'Documentos', icon: <DocumentsIcon /> },
       { text: 'Reuniões', icon: <MeetingsIcon /> },
