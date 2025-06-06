@@ -84,8 +84,8 @@ export const KeyPersonaService = {
 
 // Stakeholders
 export const StakeholdersService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/stakeholders`, personaData);
+  create: async (projetoId: string, stakeholderData: any) => {
+    return api.post(`/projetos/${projetoId}/stakeholders`, stakeholderData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/stakeholders`);
@@ -93,8 +93,8 @@ export const StakeholdersService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/stakeholders/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/stakeholders/${id}`, personaData);
+  update: async (projetoId: string, id: string, stakeholderData: any) => {
+    return api.put(`/projetos/${projetoId}/stakeholders/${id}`, stakeholderData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/stakeholders/${id}`);
@@ -103,8 +103,8 @@ export const StakeholdersService = {
 
 // Requisitos
 export const RequisitosService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/requisitos`, personaData);
+  create: async (projetoId: string, requisitoData: any) => {
+    return api.post(`/projetos/${projetoId}/requisitos`, requisitoData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/requisitos`);
@@ -112,8 +112,8 @@ export const RequisitosService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/requisitos/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/requisitos/${id}`, personaData);
+  update: async (projetoId: string, id: string, requisitoData: any) => {
+    return api.put(`/projetos/${projetoId}/requisitos/${id}`, requisitoData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/requisitos/${id}`);
@@ -122,8 +122,8 @@ export const RequisitosService = {
 
 // Fases do Projeto
 export const FasesProjetoService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/fasesprojeto`, personaData);
+  create: async (projetoId: string, fasesprojetoData: any) => {
+    return api.post(`/projetos/${projetoId}/fasesprojeto`, fasesprojetoData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/fasesprojeto`);
@@ -131,8 +131,8 @@ export const FasesProjetoService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/fasesprojeto/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/fasesprojeto/${id}`, personaData);
+  update: async (projetoId: string, id: string, fasesprojetoData: any) => {
+    return api.put(`/projetos/${projetoId}/fasesprojeto/${id}`, fasesprojetoData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/fasesprojeto/${id}`);
@@ -141,8 +141,8 @@ export const FasesProjetoService = {
 
 // Funcionalidades Desejadas
 export const FuncionalidadeService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/funcionalidades`, personaData);
+  create: async (projetoId: string, funcionalidadeData: any) => {
+    return api.post(`/projetos/${projetoId}/funcionalidades`, funcionalidadeData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/funcionalidades`);
@@ -150,8 +150,8 @@ export const FuncionalidadeService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/funcionalidades/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/funcionalidades/${id}`, personaData);
+  update: async (projetoId: string, id: string, funcionalidadeData: any) => {
+    return api.put(`/projetos/${projetoId}/funcionalidades/${id}`, funcionalidadeData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/funcionalidades/${id}`);
@@ -160,8 +160,8 @@ export const FuncionalidadeService = {
 
 // Documentos
 export const DocumentosService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/documentos-links`, personaData);
+  create: async (projetoId: string, documentosData: any) => {
+    return api.post(`/projetos/${projetoId}/documentos-links`, documentosData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/documentos-links`);
@@ -169,8 +169,8 @@ export const DocumentosService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/documentos-links/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/documentos-links/${id}`, personaData);
+  update: async (projetoId: string, id: string, documentosData: any) => {
+    return api.put(`/projetos/${projetoId}/documentos-links/${id}`, documentosData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/documentos-links/${id}`);
@@ -179,8 +179,8 @@ export const DocumentosService = {
 
 // Reuniões
 export const ReunioesService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/reunioes`, personaData);
+  create: async (projetoId: string, reunioesData: any) => {
+    return api.post(`/projetos/${projetoId}/reunioes`, reunioesData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/reunioes`);
@@ -188,8 +188,8 @@ export const ReunioesService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/reunioes/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/reunioes/${id}`, personaData);
+  update: async (projetoId: string, id: string, reunioesData: any) => {
+    return api.put(`/projetos/${projetoId}/reunioes/${id}`, reunioesData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/reunioes/${id}`);
@@ -201,8 +201,8 @@ export const ReunioesService = {
 
 // Solução Proposta
 export const SolucaoPropostaService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/solucoes-propostas`, personaData);
+  create: async (projetoId: string, solucoesData: any) => {
+    return api.post(`/projetos/${projetoId}/solucoes-propostas`, solucoesData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/solucoes-propostas`);
@@ -210,8 +210,8 @@ export const SolucaoPropostaService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/solucoes-propostas/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/solucoes-propostas/${id}`, personaData);
+  update: async (projetoId: string, id: string, solucoesData: any) => {
+    return api.put(`/projetos/${projetoId}/solucoes-propostas/${id}`, solucoesData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/solucoes-propostas/${id}`);
@@ -220,8 +220,8 @@ export const SolucaoPropostaService = {
 
 // Estimativa/Custos
 export const EstimativasCustosService = {
-  create: async (projetoId: string, personaData: any) => {
-    return api.post(`/projetos/${projetoId}/estimativascustos`, personaData);
+  create: async (projetoId: string, estimativacustosData: any) => {
+    return api.post(`/projetos/${projetoId}/estimativascustos`, estimativacustosData);
   },
   list: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/estimativascustos`);
@@ -229,11 +229,36 @@ export const EstimativasCustosService = {
   get: async (projetoId: string, id: string) => {
     return api.get(`/projetos/${projetoId}/estimativascustos/${id}`);
   },
-  update: async (projetoId: string, id: string, personaData: any) => {
-    return api.put(`/projetos/${projetoId}/estimativascustos/${id}`, personaData);
+  update: async (projetoId: string, id: string, estimativacustosData: any) => {
+    return api.put(`/projetos/${projetoId}/estimativascustos/${id}`, estimativacustosData);
   },
   delete: async (projetoId: string, id: string) => {
     return api.delete(`/projetos/${projetoId}/estimativascustos/${id}`);
+  }
+};
+
+// Tarefas
+export const TarefasService = {
+  create: async (projetoId: string, tarefasData: any) => {
+    return api.post(`/projetos/${projetoId}/tarefas`, tarefasData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/tarefas`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/tarefas/${id}`);
+  },
+  update: async (projetoId: string, id: string, tarefasData: any) => {
+    return api.put(`/projetos/${projetoId}/tarefas/${id}`, tarefasData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/tarefas/${id}`);
+  },
+  kanban: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/tarefas/kanban`);
+  },
+  status: async (projetoId: string, id: string, tarefasData: any) => {
+    return api.patch(`/projetos/${projetoId}/tarefas/${id}/status`, tarefasData);
   }
 };
 

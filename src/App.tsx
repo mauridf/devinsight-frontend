@@ -22,6 +22,7 @@ import DocumentosPage from './pages/DocumentosPage';
 import ReunioesPage from './pages/ReunioesPage';
 import SolucaoPropostaPage from './pages/SolucaoPropostaPage';
 import EstimativaCustoPage from './pages/EstimativaCustoPage';
+import TarefasPage from './pages/TarefasPage';
 
 // Componente de rota protegida
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -53,6 +54,7 @@ const App: React.FC = () => {
             <Route path="/reunioes" element={<PrivateRoute><ReunioesPage /></PrivateRoute>} />
             <Route path="/solucoespropostas" element={<PrivateRoute><SolucaoPropostaPage /></PrivateRoute>} />
             <Route path="/estimativacusto" element={<PrivateRoute><EstimativaCustoPage /></PrivateRoute>} />
+            <Route path="/tarefas" element={<PrivateRoute><TarefasPage /></PrivateRoute>} />
         </Routes>
         </Router>
       </StyledThemeProvider>
