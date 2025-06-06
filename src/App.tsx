@@ -17,6 +17,8 @@ import PersonaChavePage from './pages/PersonaChavePage';
 import StakeHolderPage from './pages/StakeHolersPage';
 import RequisitoPage from './pages/RequisitoPage';
 import FasesProjetoPage from './pages/FasesProjetoPage';
+import FuncionalidadePage from './pages/FuncionalidadePage';
+import { FuncionalidadeService } from './services/api';
 
 // Componente de rota protegida
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -43,6 +45,7 @@ const App: React.FC = () => {
             <Route path="/stakeholder" element={<PrivateRoute><StakeHolderPage /></PrivateRoute>} />
             <Route path="/requisito" element={<PrivateRoute><RequisitoPage /></PrivateRoute>} />
             <Route path="/fasesprojeto" element={<PrivateRoute><FasesProjetoPage /></PrivateRoute>} />
+            <Route path="/funcionalidade" element={<PrivateRoute><FuncionalidadePage /></PrivateRoute>} />
         </Routes>
         </Router>
       </StyledThemeProvider>

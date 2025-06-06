@@ -40,7 +40,7 @@ const menuItems = [
       { text: 'Stakeholders', icon: <StakeholdersIcon />, path: '/stakeholder' },
       { text: 'Requisitos', icon: <RequirementsIcon />, path: '/requisito' },
       { text: 'Fases do Projeto', icon: <PhasesIcon />, path: '/fasesprojeto' },
-      { text: 'Funcionalidades', icon: <FeaturesIcon /> },
+      { text: 'Funcionalidades', icon: <FeaturesIcon />, path: '/funcionalidade' },
       { text: 'Documentos', icon: <DocumentsIcon /> },
       { text: 'Reuniões', icon: <MeetingsIcon /> },
       { text: 'Solução Proposta', icon: <SolutionIcon /> }

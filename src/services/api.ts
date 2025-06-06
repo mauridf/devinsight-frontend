@@ -139,4 +139,23 @@ export const FasesProjetoService = {
   }
 };
 
+// Funcionalidades Desejadas
+export const FuncionalidadeService = {
+  create: async (projetoId: string, personaData: any) => {
+    return api.post(`/projetos/${projetoId}/funcionalidades`, personaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/funcionalidades`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/funcionalidades/${id}`);
+  },
+  update: async (projetoId: string, id: string, personaData: any) => {
+    return api.put(`/projetos/${projetoId}/funcionalidades/${id}`, personaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/funcionalidades/${id}`);
+  }
+};
+
 export default api;
