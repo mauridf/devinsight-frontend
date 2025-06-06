@@ -1,5 +1,15 @@
-import React from 'react';
-import { Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import React, { useState } from 'react';
+import { 
+  Box, 
+  Typography, 
+  List, 
+  ListItem, 
+  ListItemButton, 
+  ListItemIcon, 
+  ListItemText,
+  Collapse,
+  IconButton 
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import {
   Dashboard as DashboardIcon,
@@ -22,10 +32,15 @@ import {
   Schema as TopicIcon,
   Route as RouteIcon,
   Storage as DatabaseIcon,
-  Code as CodeIcon
+  Code as CodeIcon,
+  ExpandMore as ExpandMoreIcon,
+  ChevronRight as ChevronRightIcon,
+  Visibility as OverviewIcon,
+  Assessment as LevantamentoIcon,
+  Business as GestaoIcon,
+  LocalShipping as EntregasIcon
 } from '@mui/icons-material';
 
-// Definindo tipos para os itens do menu
 type MenuItem = {
   text: string;
   icon: React.ReactNode;
@@ -34,18 +49,21 @@ type MenuItem = {
 
 type MenuSection = {
   title: string;
+  icon: React.ReactNode;
   items: MenuItem[];
 };
 
 const menuItems: MenuSection[] = [
   {
     title: 'VISÃO GERAL',
+    icon: <OverviewIcon fontSize="small" />,
     items: [
       { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' }
     ]
   },
   {
     title: 'LEVANTAMENTO',
+    icon: <LevantamentoIcon fontSize="small" />,
     items: [
       { text: 'Projetos', icon: <ProjectsIcon />, path: '/projetos' },
       { text: 'Personas Chave', icon: <PersonasIcon />, path: '/personaschave' },
@@ -60,58 +78,125 @@ const menuItems: MenuSection[] = [
   },
   {
     title: 'GESTÃO',
+    icon: <GestaoIcon fontSize="small" />,
     items: [
-      { text: 'Estimativa/Custos', icon: <EstimateIcon /> },
-      { text: 'Tarefas', icon: <TasksIcon /> },
-      { text: 'Kanban', icon: <KanbanIcon /> },
-      { text: 'Validação Técnica', icon: <ValidationIcon /> }
+      { text: 'Estimativa/Custos', icon: <EstimateIcon />, path: '/estimativacusto' },
+      { text: 'Tarefas', icon: <TasksIcon />, path: '/tarefas' },
+      { text: 'Kanban', icon: <KanbanIcon />, path: '/kanban' },
+      { text: 'Validação Técnica', icon: <ValidationIcon />, path: '/validacao' }
     ]
   },
   {
     title: 'ENTREGAS',
+    icon: <EntregasIcon fontSize="small" />,
     items: [
-      { text: 'Entregas finais', icon: <DeliveryIcon /> },
-      { text: 'Relatórios e Documentos', icon: <ReportsIcon /> },
-      { text: 'Relatório de Consultoria', icon: <DocumentsIcon /> },
-      { text: 'Diagrama de Arquitetura', icon: <ArchitectureIcon /> },
-      { text: 'Estatologia de Pópico', icon: <TopicIcon /> },
-      { text: 'Rua de Atletização e Leitura', icon: <RouteIcon /> },
-      { text: 'Banco de Dados (NER)', icon: <DatabaseIcon /> },
-      { text: 'Padrões de Código e Arquitetura', icon: <CodeIcon /> }
+      { text: 'Entregas finais', icon: <DeliveryIcon />, path: '/entregas' },
+      { text: 'Relatórios e Documentos', icon: <ReportsIcon />, path: '/relatorios' },
+      { text: 'Relatório de Consultoria', icon: <DocumentsIcon />, path: '/consultoria' },
+      { text: 'Diagrama de Arquitetura', icon: <ArchitectureIcon />, path: '/arquitetura' },
+      { text: 'Estatologia de Pópico', icon: <TopicIcon />, path: '/topico' },
+      { text: 'Rua de Atletização e Leitura', icon: <RouteIcon />, path: '/rota' },
+      { text: 'Banco de Dados (NER)', icon: <DatabaseIcon />, path: '/banco-de-dados' },
+      { text: 'Padrões de Código e Arquitetura', icon: <CodeIcon />, path: '/codigo' }
     ]
   }
 ];
 
 const SideMenu: React.FC = () => {
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    'VISÃO GERAL': true,
+    'LEVANTAMENTO': true,
+    'GESTÃO': true,
+    'ENTREGAS': true
+  });
+
+  const toggleSection = (title: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [title]: !prev[title]
+    }));
+  };
+
   return (
-    <Box width={250} bgcolor="#f5f5f5" p={2} borderRight="1px solid #ddd">
-      <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', mt: 2 }}>
+    <Box 
+      width={250} 
+      bgcolor="#f5f5f5" 
+      p={2} 
+      borderRight="1px solid #ddd"
+      sx={{ 
+        overflowY: 'auto',
+        height: '100vh',
+        '&::-webkit-scrollbar': {
+          width: '6px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: '#6CB1E1',
+          borderRadius: '3px',
+        }
+      }}
+    >
+      <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', mt: 2, display: 'flex', alignItems: 'center' }}>
+        <Box component="span" sx={{ mr: 1, color: '#3B84C4' }}>
+          <OverviewIcon />
+        </Box>
         Menu
       </Typography>
       
       {menuItems.map((section) => (
-        <Box key={section.title} sx={{ mb: 2 }}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#3B84C4' }}>
-            {section.title}
-          </Typography>
-          <List>
-            {section.items.map((item) => (
-              <ListItem key={item.text} disablePadding>
-                <ListItemButton 
-                  component={item.path ? Link : 'div'} 
-                  to={item.path || ''}
-                >
-                  <ListItemIcon sx={{ minWidth: 36, color: '#6CB1E1' }}>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+        <Box key={section.title} sx={{ mb: 1 }}>
+          <ListItemButton 
+            onClick={() => toggleSection(section.title)}
+            sx={{ 
+              borderRadius: 1,
+              '&:hover': { backgroundColor: '#e0e0e0' }
+            }}
+          >
+            <ListItemIcon sx={{ minWidth: 36, color: '#3B84C4' }}>
+              {section.icon}
+            </ListItemIcon>
+            <ListItemText 
+              primary={
+                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#3B84C4' }}>
+                  {section.title}
+                </Typography>
+              } 
+            />
+            {expandedSections[section.title] ? (
+              <ExpandMoreIcon fontSize="small" sx={{ color: '#6CB1E1' }} />
+            ) : (
+              <ChevronRightIcon fontSize="small" sx={{ color: '#6CB1E1' }} />
+            )}
+          </ListItemButton>
+          
+          <Collapse in={expandedSections[section.title]} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              {section.items.map((item) => (
+                <ListItem key={item.text} disablePadding>
+                  <ListItemButton 
+                    component={item.path ? Link : 'div'} 
+                    to={item.path || ''}
+                    sx={{ 
+                      pl: 4,
+                      borderRadius: 1,
+                      '&:hover': { backgroundColor: '#e0e0e0' }
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 36, color: '#6CB1E1' }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary={item.text} 
+                      primaryTypographyProps={{ variant: 'body2' }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
         </Box>
       ))}
     </Box>
   );
 };
+
 export default SideMenu;
