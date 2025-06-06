@@ -257,8 +257,8 @@ export const TarefasService = {
   kanban: async (projetoId: string) => {
     return api.get(`/projetos/${projetoId}/tarefas/kanban`);
   },
-  status: async (projetoId: string, id: string, tarefasData: any) => {
-    return api.patch(`/projetos/${projetoId}/tarefas/${id}/status`, tarefasData);
+  status: async (projectId: string, taskId: string, status: number) => {
+    return api.patch(`/projetos/${projectId}/tarefas/${taskId}/status`, status);
   }
 };
 

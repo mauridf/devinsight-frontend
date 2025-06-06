@@ -23,10 +23,13 @@ import ReunioesPage from './pages/ReunioesPage';
 import SolucaoPropostaPage from './pages/SolucaoPropostaPage';
 import EstimativaCustoPage from './pages/EstimativaCustoPage';
 import TarefasPage from './pages/TarefasPage';
+import KanbanPage from './pages/KanbanPage';
 
 // Componente de rota protegida
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return isAuthenticated() ? <>{children}</> : <Navigate to="/login" />;
+  const auth = isAuthenticated();
+  console.log('PrivateRoute - isAuthenticated:', auth);
+  return auth ? <>{children}</> : <Navigate to="/login" />;
 };
 
 const App: React.FC = () => {
@@ -55,6 +58,7 @@ const App: React.FC = () => {
             <Route path="/solucoespropostas" element={<PrivateRoute><SolucaoPropostaPage /></PrivateRoute>} />
             <Route path="/estimativacusto" element={<PrivateRoute><EstimativaCustoPage /></PrivateRoute>} />
             <Route path="/tarefas" element={<PrivateRoute><TarefasPage /></PrivateRoute>} />
+            <Route path="/kanban" element={<PrivateRoute><KanbanPage /></PrivateRoute>} />
         </Routes>
         </Router>
       </StyledThemeProvider>
