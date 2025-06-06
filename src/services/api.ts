@@ -158,4 +158,22 @@ export const FuncionalidadeService = {
   }
 };
 
+// Documentos
+export const DocumentosService = {
+  create: async (projetoId: string, personaData: any) => {
+    return api.post(`/projetos/${projetoId}/documentos-links`, personaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/documentos-links`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/documentos-links/${id}`);
+  },
+  update: async (projetoId: string, id: string, personaData: any) => {
+    return api.put(`/projetos/${projetoId}/documentos-links/${id}`, personaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/documentos-links/${id}`);
+  }
+};
 export default api;

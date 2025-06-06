@@ -41,7 +41,7 @@ const menuItems = [
       { text: 'Requisitos', icon: <RequirementsIcon />, path: '/requisito' },
       { text: 'Fases do Projeto', icon: <PhasesIcon />, path: '/fasesprojeto' },
       { text: 'Funcionalidades', icon: <FeaturesIcon />, path: '/funcionalidade' },
-      { text: 'Documentos', icon: <DocumentsIcon /> },
+      { text: 'Documentos', icon: <DocumentsIcon />, path: '/documentos' },
       { text: 'Reuniões', icon: <MeetingsIcon /> },
       { text: 'Solução Proposta', icon: <SolutionIcon /> }
     ]
