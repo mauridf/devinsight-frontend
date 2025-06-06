@@ -262,4 +262,26 @@ export const TarefasService = {
   }
 };
 
+// Validação Técnica
+export const ValidacaoTecnicaService = {
+  create: async (projetoId: string, validacaotecnicaData: any) => {
+    return api.post(`/projetos/${projetoId}/validacoes-tecnicas`, validacaotecnicaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/validacoes-tecnicas`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/validacoes-tecnicas/${id}`);
+  },
+  update: async (projetoId: string, id: string, validacaotecnicaData: any) => {
+    return api.put(`/projetos/${projetoId}/validacoes-tecnicas/${id}`, validacaotecnicaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/validacoes-tecnicas/${id}`);
+  },
+  validar: async (projectId: string, taskId: string, observacao: string) => {
+    return api.patch(`/projetos/${projectId}/validacoes-tecnicas/${taskId}/validar`, observacao);
+  }
+};
+
 export default api;
