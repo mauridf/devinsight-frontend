@@ -176,4 +176,27 @@ export const DocumentosService = {
     return api.delete(`/projetos/${projetoId}/documentos-links/${id}`);
   }
 };
+
+// Reuniões
+export const ReunioesService = {
+  create: async (projetoId: string, personaData: any) => {
+    return api.post(`/projetos/${projetoId}/reunioes`, personaData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/reunioes`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/reunioes/${id}`);
+  },
+  update: async (projetoId: string, id: string, personaData: any) => {
+    return api.put(`/projetos/${projetoId}/reunioes/${id}`, personaData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/reunioes/${id}`);
+  },
+  proximas: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/reunioes/proximas`);
+  }
+};
+
 export default api;

@@ -42,7 +42,7 @@ const menuItems = [
       { text: 'Fases do Projeto', icon: <PhasesIcon />, path: '/fasesprojeto' },
       { text: 'Funcionalidades', icon: <FeaturesIcon />, path: '/funcionalidade' },
       { text: 'Documentos', icon: <DocumentsIcon />, path: '/documentos' },
-      { text: 'Reuniões', icon: <MeetingsIcon /> },
+      { text: 'Reuniões', icon: <MeetingsIcon />, path: '/reunioes' },
       { text: 'Solução Proposta', icon: <SolutionIcon /> }
     ]
   },
