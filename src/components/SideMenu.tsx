@@ -25,7 +25,19 @@ import {
   Code as CodeIcon
 } from '@mui/icons-material';
 
-const menuItems = [
+// Definindo tipos para os itens do menu
+type MenuItem = {
+  text: string;
+  icon: React.ReactNode;
+  path?: string;
+};
+
+type MenuSection = {
+  title: string;
+  items: MenuItem[];
+};
+
+const menuItems: MenuSection[] = [
   {
     title: 'VISÃO GERAL',
     items: [
@@ -43,7 +55,7 @@ const menuItems = [
       { text: 'Funcionalidades', icon: <FeaturesIcon />, path: '/funcionalidade' },
       { text: 'Documentos', icon: <DocumentsIcon />, path: '/documentos' },
       { text: 'Reuniões', icon: <MeetingsIcon />, path: '/reunioes' },
-      { text: 'Solução Proposta', icon: <SolutionIcon /> }
+      { text: 'Solução Proposta', icon: <SolutionIcon />, path: '/solucoespropostas' }
     ]
   },
   {
