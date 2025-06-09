@@ -91,7 +91,6 @@ const menuItems: MenuSection[] = [
     icon: <EntregasIcon fontSize="small" />,
     items: [
       { text: 'Entregas finais', icon: <DeliveryIcon />, path: '/entregas' },
-      { text: 'Relatórios e Documentos', icon: <ReportsIcon />, path: '/relatorios' },
       { text: 'Relatório de Consultoria', icon: <DocumentsIcon />, path: '/consultoria' },
       { text: 'Diagrama de Arquitetura', icon: <ArchitectureIcon />, path: '/arquitetura' },
       { text: 'Estatologia de Pópico', icon: <TopicIcon />, path: '/topico' },

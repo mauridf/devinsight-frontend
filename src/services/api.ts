@@ -284,4 +284,23 @@ export const ValidacaoTecnicaService = {
   }
 };
 
+// Entregas Finais
+export const EntregasFinaisService = {
+  create: async (projetoId: string, entregasfinaisData: any) => {
+    return api.post(`/projetos/${projetoId}/entregas-finais`, entregasfinaisData);
+  },
+  list: async (projetoId: string) => {
+    return api.get(`/projetos/${projetoId}/entregas-finais`);
+  },
+  get: async (projetoId: string, id: string) => {
+    return api.get(`/projetos/${projetoId}/entregas-finais/${id}`);
+  },
+  update: async (projetoId: string, id: string, entregasfinaisData: any) => {
+    return api.put(`/projetos/${projetoId}/entregas-finais/${id}`, entregasfinaisData);
+  },
+  delete: async (projetoId: string, id: string) => {
+    return api.delete(`/projetos/${projetoId}/entregas-finais/${id}`);
+  }
+};
+
 export default api;
